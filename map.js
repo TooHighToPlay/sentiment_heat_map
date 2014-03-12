@@ -1,3 +1,23 @@
+$( document ).ready(function() {
+  	var bootstrapCSSLink = $('<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">');
+	var bootstrapThemeCSSLink = $('<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">');
+	var bootstrapJavaScriptLink = $('<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>');
+
+	$('body').append(bootstrapCSSLink);
+	$('body').append(bootstrapThemeCSSLink);
+	$('body').append(bootstrapJavaScriptLink);
+});
+
+$('#submit').click( function() {
+  var data = document.getElementById('data');
+
+  var newData = jQuery.parseJSON( data.value );
+
+  var mapObj = $('#world-map').vectorMap('get', 'mapObject');
+  mapObj.series.regions[0].clear();
+  mapObj.series.regions[0].setValues(newData);
+});
+
 var gdpData = {
   "AF": 16.63,
   "AL": 11.58,
@@ -190,6 +210,7 @@ $('#world-map').vectorMap({
     regions: [{
       values: gdpData,
       scale: ['#C8EEFF', '#0071A4'],
+      //scale: ['#FBEFEF', '#FF0000'],
       normalizeFunction: 'polynomial'
     }]
   },
@@ -197,3 +218,11 @@ $('#world-map').vectorMap({
     el.html(el.html()+' (GDP - '+gdpData[code]+')');
   }
 });
+
+var mapObj = $('#world-map').vectorMap('get', 'mapObject');
+var steps = 10;
+for (var i = 0; i<=steps; i++) {
+  var val = 2000/steps*i;
+  var color = mapObj.series.regions[0].scale.getValue(val);
+  $('#key').append('<div style="background-color:' + color + ';">' + val + ' - ' + color + '</div>');
+} 

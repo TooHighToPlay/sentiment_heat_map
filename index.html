@@ -6,13 +6,41 @@
 	<script src="jquery/jquery-1.11.0.js"></script>
 	<script src="jquery-jvectormap-1.2.2/jquery-jvectormap-1.2.2.min.js"></script>
 	<script src="maps/jquery-jvectormap-world-mill-en.js"></script>
+
+	<link rel="stylesheet" media="all" href="css/syntax.css"/>
 </head>
 <body>
 	<div class="container">
-		<div id="header">
-			<h1>Sentiment world map</h1>
+		<div class='row text-center'>
+			<h1 >Sentiment world map</h1>
 		</div>
-		<div id="world-map" style="width: 600px; height: 400px"></div>
+		<div class="row center-block">
+			<div id="world-map" class="center-block" style="width: 600px; height: 400px"></div>
+		</div>
+		<div id="key" class="row center-block">
+		</div>
+		<br />
+		<div class="row text-center">
+		<div class="col-lg-6">
+			<p>You can provide data here in the following format (territory code must be represented accoding to ISO 3166 alpha 2 ):</p>
+				<pre class="syntax"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"AF"</span><span class="o">:</span> <span class="mf">16.63</span><span class="p">,</span>
+  <span class="s2">"AL"</span><span class="o">:</span> <span class="mf">11.58</span><span class="p">,</span>
+  <span class="s2">"DZ"</span><span class="o">:</span> <span class="mf">158.97</span><span class="p">,</span>
+  <span class="p">...</span>
+<span class="p">};</span></code></pre>
+		</div>
+		<div class="col-lg-6">
+			<br />
+			<p>New data:</p>
+			<form role="form" style="padding-top:5px;">
+				<textarea id="data" class="form-control" rows="3"></textarea>
+			</form>
+			<button id="submit" type="button" class="btn btn-default" style="margin-top: 5px;">Submit</button>
+		</div>
+
+			
+		<div>
 	</div>
 
 	<script src="map.js"></script>
