@@ -1,4 +1,5 @@
-var scale = ['#C8EEFF', '#0071A4'];
+//var scale = ['#C8EEFF', '#0071A4'];
+var scale = ['#FF0000', '#0000FF'];
 
 $( document ).ready(function() {
   	var bootstrapCSSLink = $('<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">');
@@ -10,10 +11,10 @@ $( document ).ready(function() {
 	$('body').append(bootstrapJavaScriptLink);
 });
 
-function generateLegends() {
+function generateLegends(data) {
   var mapObj = $('#world-map').vectorMap('get', 'mapObject');
-  var min = Math.ceil(jvm.min(gdpData));
-  var max = Math.ceil(jvm.max(gdpData));
+  var min = Math.ceil(jvm.min(data));
+  var max = Math.ceil(jvm.max(data));
   //var steps = Math.floor(max-min);
   for (var i = min; i<=max; i++) {
   var val = i;
@@ -34,7 +35,7 @@ $('#submit').click( function() {
 
   $(".customLegend").remove();
 
-  generateLegends(); 
+  generateLegends(newData); 
 });
 
 var gdpData = {
@@ -260,4 +261,4 @@ $('#world-map').vectorMap({
   }
 });
 
-generateLegends(); 
+generateLegends(gdpData); 
