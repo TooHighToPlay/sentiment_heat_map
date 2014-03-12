@@ -16,10 +16,21 @@ function generateLegends(data) {
   var min = Math.ceil(jvm.min(data));
   var max = Math.ceil(jvm.max(data));
   //var steps = Math.floor(max-min);
+  var first = false;
   for (var i = min; i<=max; i++) {
-  var val = i;
-  var color = mapObj.series.regions[0].scale.getValue(val);
-  $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + ' - ' + color + '</div>');
+    var val = i;
+    var color = mapObj.series.regions[0].scale.getValue(val);
+    //$('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + ' - ' + color + '</div>');
+    if (!first && i < 5) {
+      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- negative' +'</div>');
+      first = true;
+    } else if (i == 5) {
+      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- neutral' +'</div>');
+    } else if (i == max) {
+      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- positive' +'</div>');
+    } else {
+      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val +'</div>');
+    }
   }
 }
 
@@ -66,7 +77,7 @@ $('#submit').click( function() {
   //mapObj.series.regions[0].clear();
   //mapObj.series.regions[0].setValues(newData);
   //mapObj.series.regions[0].setScale(scale);
-  
+
   generateLegends(newData); 
 });
 
