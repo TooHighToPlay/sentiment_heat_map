@@ -48,7 +48,7 @@ function initialiseMap(data, scale) {
     }],
   },
   onRegionLabelShow: function(e, el, code){
-    el.html(el.html()+' (Sentiment - '+gdpData[code]+')');
+    el.html(el.html()+' (Sentiment - '+data[code]+')');
   }
 });
 }
