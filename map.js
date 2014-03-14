@@ -34,7 +34,7 @@ function generateLegends(data) {
   }
 }
 
-function initialiseMap(data, scale) {
+function initialiseMap(data, scale, normalize) {
   $('#world-map').vectorMap({
   map: 'world_mill_en',
   series: {
@@ -42,7 +42,7 @@ function initialiseMap(data, scale) {
       values: data,
       //scale: scale,
       scale: scale,
-      normalizeFunction: 'polynomial',
+      normalizeFunction: normalize,
       min: jvm.min(data),
       max: jvm.max(data)
     }],
@@ -71,7 +71,8 @@ $('#submit').click( function() {
     
     $('#mapPosition').append('<div id="world-map" class="center-block" style="width: 600px; height: 400px"></div>');
 
-  initialiseMap(newData, scale);
+  var normalizeFunction = $('#normalize').val();
+  initialiseMap(newData, scale, normalizeFunction);
 
   var mapObj = $('#world-map').vectorMap('get', 'mapObject');
   //mapObj.series.regions[0].clear();
