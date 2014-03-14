@@ -18,8 +18,30 @@ function generateLegends(data) {
   //var steps = Math.floor(max-min);
   var first = false;
   $('#key').append('<span class="customLegend" style="display: inline-block;width: 60px; height: 20px;"><b>Negative</b></span>');
+  
+  var step = Math.ceil((max-min) / 10);
+  
   for (var i = min; i<=max; i++) {
+    
     var val = i;
+
+    if ((max-min) > 10) {
+      
+      if (i == min) {
+        val = min;
+        i =min;
+      }  
+      else if ((i != min) && (i != max)) {
+        if ((i+step) < max) {
+          val = i + step;
+          i = val;
+        } else {
+          val = max;
+          i = max;
+        }
+      }
+    }
+
     var color = mapObj.series.regions[0].scale.getValue(val);
     //$('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + ' - ' + color + '</div>');
     // if (!first && i < 5) {
@@ -64,15 +86,14 @@ $('#submit').click( function() {
 
   var newData = jQuery.parseJSON( data.value );
 
-  if (jvm.min(newData) < 0 || jvm.min(newData) > 10 || jvm.max(newData) > 10 || jvm.max(newData) < 0) {
-    $('#warning').append('<h3 id="warningMsg" style="color:red;">Data values must be in range [0,10] !!!</h3>');
-    return;
-  }
+  //if (jvm.min(newData) < 0 || jvm.min(newData) > 10 || jvm.max(newData) > 10 || jvm.max(newData) < 0) {
+  //  $('#warning').append('<h3 id="warningMsg" style="color:red;">Data values must be in range [0,10] !!!</h3>');
+  //  return;
+  //}
 
   $('#warningMsg').remove();
 
-    
-    $('#mapPosition').append('<div id="world-map" class="center-block" style="width: 600px; height: 400px"></div>');
+  $('#mapPosition').append('<div id="world-map" class="center-block" style="width: 600px; height: 400px"></div>');
 
   var normalizeFunction = $('#normalize').val();
   initialiseMap(newData, scale, normalizeFunction);
