@@ -17,21 +17,24 @@ function generateLegends(data) {
   var max = Math.ceil(jvm.max(data));
   //var steps = Math.floor(max-min);
   var first = false;
+  $('#key').append('<span class="customLegend" style="display: inline-block;width: 60px; height: 20px;"><b>Negative</b></span>');
   for (var i = min; i<=max; i++) {
     var val = i;
     var color = mapObj.series.regions[0].scale.getValue(val);
     //$('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + ' - ' + color + '</div>');
-    if (!first && i < 5) {
-      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- negative' +'</div>');
-      first = true;
-    } else if (i == 5) {
-      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- neutral' +'</div>');
-    } else if (i == max) {
-      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- positive' +'</div>');
-    } else {
-      $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val +'</div>');
-    }
+    // if (!first && i < 5) {
+    //   $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- negative' +'</div>');
+    //   first = true;
+    // } else if (i == 5) {
+    //   $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- neutral' +'</div>');
+    // } else if (i == max) {
+    //   $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val + '- positive' +'</div>');
+    // } else {
+    //   $('#key').append('<div class="customLegend" style="background-color:' + color + ';">' + val +'</div>');
+    // }
+    $('#key').append('<span class="customLegend" style="background-color:' + color + ';display: inline-block;width: 50px; height: 20px;">' + val +'</span>');
   }
+  $('#key').append('<span class="customLegend" style="display: inline-block;width: 50px; height: 20px;"><b> Positive</b></span>');
 }
 
 function initialiseMap(data, scale, normalize) {
